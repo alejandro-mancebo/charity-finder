@@ -17,20 +17,20 @@ Setup your development environment. Install NodeJS and make sure you have node v
 
 ### Installing
 
-1. Create a new React application using Vite:
+#### 1. Create a new React application using Vite:
  * npx create-vite@latest charity-finder-app --template react-ts
  * cd charity-finder-app
  * npm install
  
-2. Install the necessary dependencies: 
+#### 2. Install the necessary dependencies: 
  * npm install react-router-dom
 
-3. Install dependencies for easier styling:
+#### 3. Install dependencies for easier styling:
  * npm install bootstrap
  * npm install styled-components
 
-4. Then import it in your main.tsx:
+#### 4. Then import it in your main.tsx:
  * import 'bootstrap/dist/css/bootstrap.css'
 
-5. Run the application:
+#### 5. Run the application:
  * npm run dev
