@@ -18,8 +18,11 @@ Setup your development environment. Install NodeJS and make sure you have node v
 ### Installing
 
 1. Create a new React application using Vite:
+
  . npx create-vite@latest charity-finder-app --template react-ts
+
  . cd charity-finder-app
+
  . npm install
  
 2. Install the necessary dependencies: 
