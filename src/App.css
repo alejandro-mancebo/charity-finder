@@ -1,0 +1,14 @@
+#root {
+
+  --containerWidth: 80em;
+
+  max-width: var(--containerWidth);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.page {
+  margin-top: 5em;
+}
+
+
