@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import { Header } from "../src/components/Header"
 import Home from './pages/HomePage'
 import Favorites from './pages/Favorites'
-import CharityDetail from './pages/CharityDetail'
+import CharityDetail from './pages/CharityDetailPage'
 
 import './App.css'
 
@@ -20,7 +20,7 @@ const Dashboard = () => {
 const router = createBrowserRouter([
   { path: "/", element: <Dashboard />, children: [{ path: '/', element: <Home /> }] },
   { path: "/favorites", element: <Dashboard />, children: [{ path: "/favorites", element: <Favorites /> }] },
-  { path: "/charity-detail", element: <Dashboard />, children: [{ path: "/charity-detail", element: <CharityDetail /> }] },
+  { path: "/charity/:ein", element: <Dashboard />, children: [{ path: "/charity/:ein", element: <CharityDetail /> }] },
 ])
 
 function App() {
