@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Card } from '../components/card'
+import EveryData from '../type/interfaces'
 
 import styled from 'styled-components'
 
@@ -19,7 +20,8 @@ export const FavoriteCharities = () => {
 
   const storeCharityList: string | null = localStorage.getItem('charityList');
 
-  let charityList: any[] | any;
+  let charityList: EveryData[] 
+  // | EveryData;
 
   if (storeCharityList) {
     charityList = JSON.parse(storeCharityList)
@@ -42,7 +44,7 @@ export const FavoriteCharities = () => {
       <h3>Favorite Charities</h3>
       <Container>
         {charityList.length > 0 ? (
-          charityList.map((list: any) => {
+          charityList.map((list: EveryData) => {
             return (
               <div key={list.ein}>
                 <Card charity={list} />

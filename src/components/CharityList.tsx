@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { Card } from '../components/card'
 import EveryData from '../type/interfaces'
 
@@ -19,12 +19,12 @@ const Container = styled.div`
 `
 
 export const CharityList = () => {
-  const [charityList, setCharityList] = useState([])
+  const [charityList, setCharityList] = useState<EveryData[]>([])
 
   useEffect(() => {
-    axios.get<EveryData[]>('https://partners.every.org/v0.2/search/pets?apiKey=pk_live_5174875192aa87643c72e93ad57baabc')
-      .then((res: AxiosResponse<EveryData[]>) => {
-        console.log(res)
+
+    axios.get('https://partners.every.org/v0.2/search/pets?apiKey=pk_live_5174875192aa87643c72e93ad57baabc')
+      .then(res=>{
         setCharityList(res.data.nonprofits)
       })
       .catch(error => {

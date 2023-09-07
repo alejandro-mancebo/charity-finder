@@ -1,3 +1,4 @@
+import {useState} from 'react'
 import styled from 'styled-components'
 
 
@@ -38,18 +39,23 @@ const SearchStyle = styled.div`
   }
 `;
 
+
 export const Search = () => {
+  const [searchInput, setSearchInput] = useState<string>('')
 
 
   return (
     <SearchStyle>
       <div className="">
-        <input type="search" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <input 
+        type="search"
+         placeholder="Search" 
+         aria-label="Search" 
+         value={searchInput}
+         onChange={e => setSearchInput(e.target.value)}
+         aria-describedby="search-addon" />
         <button type="button" >search</button>
       </div>
-      {/* <div className="">
-        favorites
-      </div> */}
     </SearchStyle>
   )
 }

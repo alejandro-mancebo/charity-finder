@@ -1,6 +1,5 @@
 
 interface EveryData {
-  nonprofits: any[];
   ein: string;
   name: string;
   description: string;

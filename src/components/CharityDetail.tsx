@@ -4,9 +4,7 @@ import EveryData from '../type/interfaces'
 import { Link, useParams } from 'react-router-dom'
 import { SideView } from './SideView'
 
-
 import styled from 'styled-components'
-
 
 
 const Container = styled.div`
@@ -63,16 +61,13 @@ export const CharityDetail = () => {
 
   const { ein } = useParams();
 
-
-
-  function findCharity(charity: string): any {
-    const result = charityList.find((element) => {
-      return element.ein === charity;
-    });
+  function findCharity(charityEin: string): any {
+    const result=charityList.findIndex((element) => { return element.ein === charityEin});
+    // console.log('findcharity result', result)
     return result;
   }
 
-
+  
   useEffect(() => {
     axios.get<EveryData[]>(`https://partners.every.org/v0.2/search/${ein}?apiKey=pk_live_5174875192aa87643c72e93ad57baabc`)
       .then((res: AxiosResponse<EveryData[]>) => {
@@ -97,18 +92,35 @@ export const CharityDetail = () => {
   }, [charityList])
 
 
-  const HandleAddFavourite = (add: boolean) => {
+  const HandleAddFavourite = (toAdd: boolean) => {
 
-    if (add) {
-      setIsAdded(add)
+    console.log('handle Add favourite', toAdd)
+
+    if (toAdd) {
+      setIsAdded(toAdd)
       if (charityList.length > 0) {
-        if (!findCharity(charity.ein)) {
+        if (findCharity(charity.ein) === -1) {
           setCharityList([...charityList, charity]);
         }
       } else {
         setCharityList([charity]);
       }
     }
+  }
+
+
+  const HandleRemoveFromFavourite =(toRemove: boolean) => {
+    if(toRemove) {
+      const index: number = findCharity(charity.ein) ;
+        if (index > -1) {
+          charityList.splice(index, 1);
+          setCharityList([...charityList])
+          console.log(charityList)
+        }
+      // }
+      console.log('index', index, charity.ein)
+    }
+    console.log('remove', toRemove)
   }
 
 
@@ -152,7 +164,7 @@ export const CharityDetail = () => {
         </div>
       </Container >
 
-      <SideView charity={charity} addToFavourites={HandleAddFavourite} isAdded={isAdded} />
+      <SideView charity={charity} addToFavourites={HandleAddFavourite} removeFromFavourites={HandleRemoveFromFavourite} isAdded={isAdded} />
     </>
   )
 }

@@ -71,13 +71,14 @@ const Container = styled.div`
 
 interface Props {
   charity: any;
-  addToFavourites: (e: boolean) => any;
+  addToFavourites: (e: boolean) => boolean;
+  removeFromFavourites: (e: boolean) => boolean;
   isAdded: boolean;
 }
 
 
 
-export const SideView = ({ charity, addToFavourites, isAdded }: Props) => {
+export const SideView = ({ charity, addToFavourites, removeFromFavourites, isAdded }: Props) => {
 
   // const storeCharityList: string | null = localStorage.getItem('charityList');
 
@@ -91,6 +92,7 @@ export const SideView = ({ charity, addToFavourites, isAdded }: Props) => {
 
   // const [charityList, setCharityList] = useState<any[]>(initialCharityList);
   const [isAddedCharity, setIsAdded] = useState<boolean>(isAdded);
+  const [isremoveCharity, setIsRemoved] = useState<boolean>(isAdded);
 
   // useEffect(() => {
 
@@ -121,11 +123,12 @@ export const SideView = ({ charity, addToFavourites, isAdded }: Props) => {
   //   return result;
   // }
 
-
-
-  const HandleAddFavourite = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setIsAdded(!isAdded)
-    addToFavourites(isAdded)
+console.log(isAdded)
+// e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  const HandleAddToFavourite = () => {
+    // e.preventDefault()
+    setIsAdded(true)
+    addToFavourites(true)
     // if (charityList.length > 0) {
     //   if (!findCharity(charity.ein)) {
     //     setCharityList([...charityList, charity]);
@@ -135,15 +138,21 @@ export const SideView = ({ charity, addToFavourites, isAdded }: Props) => {
     // }
   }
 
-
-
-
-
-
-  const HandleDeleteFromFavourite = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const index = taskList.findIndex((value) => value.id === e.currentTarget.id)
-    onDelete(index)
+  const HandleRemoveFromFavourite = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    // setIsAdded(false)
+    e.preventDefault()
+    removeFromFavourites(true)
+    console.log("remove charity" )
   }
+
+
+
+
+
+  // const HandleDeleteFromFavourite = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  //   const index = taskList.findIndex((value) => value.id === e.currentTarget.id)
+  //   onDelete(index)
+  // }
 
 
 
@@ -152,9 +161,9 @@ export const SideView = ({ charity, addToFavourites, isAdded }: Props) => {
     <Container>
       {
         isAdded ?
-          <button style={{ backgroundColor: 'red' }} onClick={HandleDeleteFromFavourite}>Remove from favorites</button>
+          <button style={{ backgroundColor: 'red' }} onClick={HandleRemoveFromFavourite}>Remove from favorites</button>
           :
-          <button style={{ backgroundColor: '#09BC8A' }} onClick={(e) => HandleAddFavourite(e)}>Add to favorites</button>
+          <button style={{ backgroundColor: '#09BC8A' }} onClick={(e) => HandleAddToFavourite(e)}>Add to favorites</button>
       }
 
       <Link to={charity.profileUrl}><button className="link">Check it in Every.org</button></Link>
