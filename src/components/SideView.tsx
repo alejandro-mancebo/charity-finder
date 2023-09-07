@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import { styled } from "styled-components"
 
@@ -14,19 +15,6 @@ const Container = styled.div`
   background: #ededed;
 
   text-align: centre;
-
-  // .link {
-  //   margin: 2rem ;
-  //   // width: fit-content;
-  //   border-radius: .7rem;
-  //   color: #fff;
-  //   font-weight: 600;
-  //   font-size:1.2rem;
-  //   background-color: #09BC8A;
-  //   padding: 1rem 2rem;
-    
-  //   text-aligh: center;
-  // }
 
   a {
     text-decoration: none;
@@ -82,20 +70,94 @@ const Container = styled.div`
 
 
 interface Props {
-  profileUrl: string;
+  charity: any;
+  addToFavourites: (e: boolean) => any;
+  isAdded: boolean;
 }
 
 
-export const SideView = ({ profileUrl }: Props) => {
-  console.log('profileUrl', profileUrl)
+
+export const SideView = ({ charity, addToFavourites, isAdded }: Props) => {
+
+  // const storeCharityList: string | null = localStorage.getItem('charityList');
+
+  // let initialCharityList: any[] | any;
+
+  // if (storeCharityList) {
+  //   initialCharityList = JSON.parse(storeCharityList)
+  // } else {
+  //   initialCharityList = []
+  // }
+
+  // const [charityList, setCharityList] = useState<any[]>(initialCharityList);
+  const [isAddedCharity, setIsAdded] = useState<boolean>(isAdded);
+
+  // useEffect(() => {
+
+  //   if (charityList.length > 0) {
+  //     localStorage.setItem('charityList', JSON.stringify(charityList))
+  //   } else {
+  //     localStorage.clear();
+  //   }
+
+  // }, [charityList])
+
+  // useEffect(() => {
+  //   if (findCharity(charity.ein)) {
+  //     console.log('findCharity', isAdded)
+  //     setIsAdded(true);
+  //   } else {
+  //     setIsAdded(false);
+  //   }
+
+  // }, [])
+
+
+
+  // function findCharity(charity: string): any {
+  //   const result = charityList.find((element) => {
+  //     return element.ein === charity;
+  //   });
+  //   return result;
+  // }
+
+
+
+  const HandleAddFavourite = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setIsAdded(!isAdded)
+    addToFavourites(isAdded)
+    // if (charityList.length > 0) {
+    //   if (!findCharity(charity.ein)) {
+    //     setCharityList([...charityList, charity]);
+    //   }
+    // } else {
+    //   setCharityList([charity]);
+    // }
+  }
+
+
+
+
+
+
+  const HandleDeleteFromFavourite = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const index = taskList.findIndex((value) => value.id === e.currentTarget.id)
+    onDelete(index)
+  }
+
+
+
+
   return (
     <Container>
+      {
+        isAdded ?
+          <button style={{ backgroundColor: 'red' }} onClick={HandleDeleteFromFavourite}>Remove from favorites</button>
+          :
+          <button style={{ backgroundColor: '#09BC8A' }} onClick={(e) => HandleAddFavourite(e)}>Add to favorites</button>
+      }
 
-      <Link to={"/favorites"}><button className="link">Add to favorites</button></Link>
-
-      <Link to={profileUrl}><button className="link">Check it in Every.org</button></Link>
-
-
+      <Link to={charity.profileUrl}><button className="link">Check it in Every.org</button></Link>
     </Container>
   )
 }

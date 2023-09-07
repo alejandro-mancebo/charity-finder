@@ -19,13 +19,13 @@ const Container = styled.div`
 `
 
 export const CharityList = () => {
-  const [posts, setposts] = useState([])
+  const [charityList, setCharityList] = useState([])
 
   useEffect(() => {
     axios.get<EveryData[]>('https://partners.every.org/v0.2/search/pets?apiKey=pk_live_5174875192aa87643c72e93ad57baabc')
       .then((res: AxiosResponse<EveryData[]>) => {
         console.log(res)
-        setposts(res.data.nonprofits)
+        setCharityList(res.data.nonprofits)
       })
       .catch(error => {
         console.log(error)
@@ -35,11 +35,11 @@ export const CharityList = () => {
   return (
 
     <Container>
-      {posts.length > 0 ? (
-        posts.map((post) => {
+      {charityList.length > 0 ? (
+        charityList.map((list) => {
           return (
-            <div key={post.ein}>
-              <Card charity={post} />
+            <div key={list.ein}>
+              <Card charity={list} />
             </div>
           )
         })) : (

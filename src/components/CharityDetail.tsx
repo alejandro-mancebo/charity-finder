@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
-import { Card } from '../components/card'
 import EveryData from '../type/interfaces'
 import { Link, useParams } from 'react-router-dom'
+import { SideView } from './SideView'
 
 
 import styled from 'styled-components'
-import { SideView } from './SideView'
 
 
 
@@ -47,9 +46,32 @@ const Container = styled.div`
 
 
 export const CharityDetail = () => {
-  const [charity, setCharity] = useState([])
+  const [charity, setCharity] = useState([]);
+
+  const storeCharityList: string | null = localStorage.getItem('favouritecharityList');
+
+  let initialCharityList: any[] | any;
+
+  if (storeCharityList) {
+    initialCharityList = JSON.parse(storeCharityList)
+  } else {
+    initialCharityList = []
+  }
+
+  const [charityList, setCharityList] = useState<any[]>(initialCharityList);
+  const [isAdded, setIsAdded] = useState<boolean>(false);
 
   const { ein } = useParams();
+
+
+
+  function findCharity(charity: string): any {
+    const result = charityList.find((element) => {
+      return element.ein === charity;
+    });
+    return result;
+  }
+
 
   useEffect(() => {
     axios.get<EveryData[]>(`https://partners.every.org/v0.2/search/${ein}?apiKey=pk_live_5174875192aa87643c72e93ad57baabc`)
@@ -62,6 +84,33 @@ export const CharityDetail = () => {
         console.log(error)
       })
   }, [ein])
+
+
+  useEffect(() => {
+
+    if (charityList.length > 0) {
+      localStorage.setItem('favouritecharityList', JSON.stringify(charityList))
+    } else {
+      localStorage.clear();
+    }
+
+  }, [charityList])
+
+
+  const HandleAddFavourite = (add: boolean) => {
+
+    if (add) {
+      setIsAdded(add)
+      if (charityList.length > 0) {
+        if (!findCharity(charity.ein)) {
+          setCharityList([...charityList, charity]);
+        }
+      } else {
+        setCharityList([charity]);
+      }
+    }
+  }
+
 
   return (
     <>
@@ -101,11 +150,9 @@ export const CharityDetail = () => {
             return <span key={i}> {tag},</span>
           })}
         </div>
-
-
       </Container >
 
-      <SideView profileUrl={charity.profileUrl} />
+      <SideView charity={charity} addToFavourites={HandleAddFavourite} isAdded={isAdded} />
     </>
   )
 }
