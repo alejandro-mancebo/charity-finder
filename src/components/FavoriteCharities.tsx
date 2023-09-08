@@ -8,7 +8,6 @@ import styled from 'styled-components'
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  // justify-content: space-between;
 
   .loading {
     margin: 2em;
@@ -18,10 +17,9 @@ const Container = styled.div`
 
 export const FavoriteCharities = () => {
 
-  const storeCharityList: string | null = localStorage.getItem('charityList');
+  const storeCharityList: string | null = localStorage.getItem('favouritecharityList');
 
   let charityList: EveryData[] 
-  // | EveryData;
 
   if (storeCharityList) {
     charityList = JSON.parse(storeCharityList)
@@ -32,7 +30,7 @@ export const FavoriteCharities = () => {
 
   useEffect(() => {
     if (charityList.length > 0) {
-      localStorage.setItem('charityList', JSON.stringify(charityList))
+      localStorage.setItem('favouritecharityList', JSON.stringify(charityList))
     } else {
       localStorage.clear();
     }

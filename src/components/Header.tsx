@@ -17,6 +17,7 @@ const Title = styled.h1`
   }
 `;
 
+
 const HeaderContainer = styled.div`
   padding: .7em 0;
   position: fixed;
@@ -26,6 +27,7 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   background-color: #09BC8A;
 `
+
 const StyledLink = styled(Link)`
 
   border-radius:  8px 8px ;
@@ -49,6 +51,7 @@ const StyledLink = styled(Link)`
   &:focus-visible {
   outline: none;
 `
+
 
 export const Header = () => {
   return (

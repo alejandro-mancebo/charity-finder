@@ -20,7 +20,7 @@ const Dashboard = () => {
 const router = createBrowserRouter([
   { path: "/", element: <Dashboard />, children: [{ path: '/', element: <Home /> }] },
   { path: "/favorites", element: <Dashboard />, children: [{ path: "/favorites", element: <Favorites /> }] },
-  { path: "/charity/:ein", element: <Dashboard />, children: [{ path: "/charity/:ein", element: <CharityDetail /> }] },
+  { path: "/charity/:charityEin", element: <Dashboard />, children: [{ path: "/charity/:charityEin", element: <CharityDetail /> }] },
 ])
 
 function App() {

@@ -3,9 +3,9 @@ interface EveryData {
   ein: string;
   name: string;
   description: string;
-  profileUrl: string;
+  profileUrl?: string;
   logoUrl?: string;
-  coverImageUrl?: string;
+  coverImageUrl: string;
   matchedTerms: string[];
   slug: string;
   location: string;

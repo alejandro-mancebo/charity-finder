@@ -54,40 +54,26 @@ interface Props {
 export const Card = ({ charity }: Props) => {
   return (
     <CardContainer>
-
       <div className="image-container">
         {charity.coverImageUrl ?
           <img src={charity.coverImageUrl} alt="Girl in a jacket"  ></img>
           : <div className="no-image"></div>
         }
       </div>
-
-
-      {/* {charity.logoUrl &&
-        <img src={charity.logoUrl} alt="Girl in a jacket" width="48" height="48"></img>
-      } */}
-
-      <div className="max-chars"><Link to={`/charity/${charity.ein}`}>{charity.name}</Link></div>
-      {/* <div className="max-chars"><Link to={charity.profileUrl}>{charity.name}</Link></div> */}
-
+      <div className="max-chars">
+        <Link to={`/charity/${charity.ein}`}>{charity.name}</Link>
+      </div>
       <div className="location">{charity.location}</div>
-
-      {/* <div>{charity.description}</div> */}
-
       <div>
         {charity.matchedTerms.map((term, i) => {
           return <span key={i}> {term}</span>
         })}
       </div>
-
       <div className="max-chars tag">Tags:
         {charity.tags.map((tag, i) => {
           return <span key={i}> {tag},</span>
         })}
       </div>
-
-
-
     </CardContainer >
   )
 }

@@ -22,10 +22,9 @@ export const CharityList = () => {
   const [charityList, setCharityList] = useState<EveryData[]>([])
 
   useEffect(() => {
-
     axios.get('https://partners.every.org/v0.2/search/pets?apiKey=pk_live_5174875192aa87643c72e93ad57baabc')
-      .then(res=>{
-        setCharityList(res.data.nonprofits)
+      .then(response => {
+        setCharityList(response.data.nonprofits)
       })
       .catch(error => {
         console.log(error)
@@ -47,7 +46,6 @@ export const CharityList = () => {
       )
       }
     </Container>
-
   )
 }
 
