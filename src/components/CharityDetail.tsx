@@ -80,6 +80,9 @@ export const CharityDetail: React.FC = () => {
 
 
   const HandleAddFavourite = (toAdd: boolean) => {
+
+    if (charity === undefined) return;
+
     if (toAdd) {
       setIsAdded(toAdd)
       if (favouritecharityList.length > 0) {
@@ -94,6 +97,9 @@ export const CharityDetail: React.FC = () => {
 
 
   const HandleRemoveFromFavourite =(toRemove: boolean) => {
+
+    if (charity === undefined) return;
+
     if(toRemove) {
       const index: number = findCharity(charity.ein) ;
         if (index > -1) {
@@ -140,17 +146,17 @@ export const CharityDetail: React.FC = () => {
               {charity.name}
             </h1>
 
-            <div className=""><Link to={charity.profileUrl}>{charity.name}</Link></div>
+            <div className="">{charity !== undefined && <Link to={charity.profileUrl!}>{charity.name}</Link>}</div>
 
             <div className="location">{charity.location}</div>
 
             <div>{charity.description && charity.description}</div> 
 
-            <div className="">Tags:
-              {charity.tags && charity.tags.map((tag, i) => {
+            {charity.tags && <div className="">Tags:
+              {charity.tags.map((tag, i) => {
                 return <span key={i}> {tag},</span>
               })}
-            </div>
+            </div>}
 
             <SideView
               charity={charity}

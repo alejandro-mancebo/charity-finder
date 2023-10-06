@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom"
 import { styled } from "styled-components"
 import EveryData from "../type/interfaces";
@@ -65,8 +65,8 @@ interface Props {
 
 export const SideView = ({ charity, addToFavourites, removeFromFavourites, isAdded }: Props) => {
 
-  const [isAddedCharity, setIsAdded] = useState<boolean>(isAdded);
-  const [isremoveCharity, setIsRemoved] = useState<boolean>(isAdded);
+  const [, setIsAdded] = useState<boolean>(isAdded);
+  const [, setIsRemoved] = useState<boolean>(isAdded);
 
 
 
@@ -100,7 +100,7 @@ export const SideView = ({ charity, addToFavourites, removeFromFavourites, isAdd
         <button className="add" onClick={(e) => HandleAddToFavourite(e)}>Add to favorites</button>
       )}
 
-      <Link to={charity.profileUrl}>
+      <Link to={charity.profileUrl!}>
         <button className="link">Check it in Every.org</button>
       </Link>
     </Container>

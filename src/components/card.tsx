@@ -64,16 +64,22 @@ export const Card = ({ charity }: Props) => {
         <Link to={`/charity/${charity.ein}`}>{charity.name}</Link>
       </div>
       <div className="location">{charity.location}</div>
-      <div>
-        {charity.matchedTerms && charity.matchedTerms.map((term, i) => {
-          return <span key={i}> {term}</span>
-        })}
-      </div>
-      <div className="max-chars tag">Tags:
-        {charity.tags && charity.tags.map((tag, i) => {
-          return <span key={i}> {tag},</span>
-        })}
-      </div>
+
+      {
+        charity.matchedTerms && <div>
+          {charity.matchedTerms.map((term, i) => {
+            return <span key={i}> {term}</span>
+          })}
+        </div>
+      }
+
+      {
+        charity.tags && <div className="max-chars tag">Tags:
+          {charity.tags.map((tag, i) => {
+            return <span key={i}> {tag},</span>
+          })}
+        </div>
+      }
     </CardContainer >
   )
 }
