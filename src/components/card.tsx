@@ -65,12 +65,12 @@ export const Card = ({ charity }: Props) => {
       </div>
       <div className="location">{charity.location}</div>
       <div>
-        {charity.matchedTerms.map((term, i) => {
+        {charity.matchedTerms && charity.matchedTerms.map((term, i) => {
           return <span key={i}> {term}</span>
         })}
       </div>
       <div className="max-chars tag">Tags:
-        {charity.tags.map((tag, i) => {
+        {charity.tags && charity.tags.map((tag, i) => {
           return <span key={i}> {tag},</span>
         })}
       </div>
